@@ -5,3 +5,13 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = apps.get_model('projects.Project')
         fields = '__all__'
+
+class PledgeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = apps.get_model('projects.Pledge')
+        fields = '__all__'
+
+class ConditionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = apps.get_model('projects.Condition')
+        fields = '__all__'
