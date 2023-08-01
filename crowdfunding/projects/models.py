@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 class Project(models.Model):
     title = models.CharField(max_length=200)
@@ -8,7 +9,10 @@ class Project(models.Model):
     date_created = models.DateTimeField()
     goaldate = models.DateTimeField()
     is_open = models.BooleanField()
-    owner = models.CharField(max_length=200)
+    owner = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        related_name='owned_projects')
 
 class Condition(models.Model):
     # pledge = models.OneToOneField(Pledge,on_delete=models.CASCADE,primary_key=True,)
@@ -20,7 +24,9 @@ class Pledge(models.Model):
     comment = models.CharField(max_length=200)
     pledge_date = models.DateTimeField()
     project = models.ForeignKey('Project',on_delete=models.CASCADE,related_name='pledges')
-    supporter = models.CharField(max_length=200)
+    supporter = models.ForeignKey(
+        get_user_model(), on_delete=models.CASCADE,related_name='pledges'
+    )
     condition = models.OneToOneField(Condition, on_delete=models.CASCADE,null=True,related_name='conditions')
 
 
