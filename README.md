@@ -19,6 +19,14 @@ delete project
 make pledge
 * [] group permissions - projects are private except in group
 
+Pages/ features:
+- Home Page 
+- My Profile (extend: childrens profiles) (incl pledges made)
+- My Projects
+- Project Detail
+- Search for Project
+- Make a Pledge
+
 ### Stretch Goals
 {{ Outline three features that will be your stretch goals if you finish your MVP }}
 * chore incentives - extra pledges when chores completed
@@ -38,6 +46,8 @@ make pledge
 
 ## Database Schema
 {{ Insert your database schema }}
+### Use of UUIDs instead of auto-increment
+I made the decision to use UUIDs instead of auto-incrementation of pk, for security reasons. Exposing an auto incremented primary key in a URL unintentionally exposes information about your database (e.g. number of records). I'm aware that it can come at a slight performance tradeoff but felt this was acceptable. 
 
 ![image info goes here](./docs/image.png)
 
