@@ -8,6 +8,7 @@ class ConditionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PledgeSerializer(serializers.ModelSerializer):
+    supporter = serializers.ReadOnlyField(source='supporter.id')
     class Meta:
         model = Pledge
         fields = '__all__'
