@@ -94,3 +94,13 @@ Deployed Project: [Deployed website](http://linkhere.com/)
 
 * [] A screenshot of Insomnia, demonstrating a token being returned.
 ![image info goes here](./docs/image.png)
+
+
+#### Notes during dev 
+
+### Password hashing
+I wanted to be able to create users easily in the admin front end for testing, so I added users to users/admin.py :
+admin.site.register(CustomUser)
+
+However the user I created was saved successfully but I was unable to log in with this user. I discovered the issue was that because I hadn't also imported UserAdmin, the password was not being hashed properly and so the password did not match. I added UserAdmin and I was now able to log in with other users I created.
+admin.site.register(CustomUser, UserAdmin)
