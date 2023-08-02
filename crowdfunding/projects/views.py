@@ -4,6 +4,7 @@ from .models import Project, Pledge, Condition
 from .serializers import ProjectSerializer, PledgeSerializer, ProjectDetailSerializer, ConditionSerializer
 from django.http import Http404
 from rest_framework import status, permissions
+from .permissions import IsOwnerOrReadOnly
 
 class ProjectList(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -29,10 +30,16 @@ class ProjectList(APIView):
         #     print(serializer.errors)
 
 class ProjectDetail(APIView):
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly
+    ]
 
     def get_object(self, pk):
         try:
-            return Project.objects.get(pk=pk)
+            project = Project.objects.get(pk=pk)
+            self.check_object_permissions(self.request, project)
+            return project
         except Project.DoesNotExist:
             raise Http404
     
