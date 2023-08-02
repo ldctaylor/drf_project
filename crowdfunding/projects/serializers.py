@@ -13,6 +13,20 @@ class PledgeSerializer(serializers.ModelSerializer):
         model = Pledge
         fields = '__all__'
 
+class PledgeDetailSerializer(PledgeSerializer):
+    # How do I bring in the relevant project's detail, here????????????????
+
+    def update(self, instance, validated_data):
+        instance.amount = validated_data.get('amount',instance.amount)
+        instance.comment = validated_data.get('comment',instance.comment)
+        instance.pledge_date = validated_data.get('pledge_date',instance.pledge_date)
+        instance.project = validated_data.get('project',instance.project)
+        instance.supporter = validated_data.get('supporter',instance.supporter)
+        instance.condition = validated_data.get('condition',instance.condition)
+        instance.save()
+        return instance 
+
+
 class ProjectSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.id')
 

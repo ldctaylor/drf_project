@@ -17,6 +17,8 @@ make project
 edit project
 delete project
 make pledge
+edit pledge 
+delete pledge
 * [] group permissions - projects are private except in group
 
 Pages/ features:
@@ -104,3 +106,8 @@ admin.site.register(CustomUser)
 
 However the user I created was saved successfully but I was unable to log in with this user. I discovered the issue was that because I hadn't also imported UserAdmin, the password was not being hashed properly and so the password did not match. I added UserAdmin and I was now able to log in with other users I created.
 admin.site.register(CustomUser, UserAdmin)
+
+#### Questions
+
+### Combining permissions
+I feel like the IsOwner and IsSupporter permissions could be combined into one as there is code being reused and the only diff is checking if it is the owner or the supporter? 
