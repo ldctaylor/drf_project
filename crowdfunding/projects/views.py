@@ -3,9 +3,11 @@ from rest_framework.response import Response
 from .models import Project, Pledge, Condition
 from .serializers import ProjectSerializer, PledgeSerializer, ProjectDetailSerializer, ConditionSerializer
 from django.http import Http404
-from rest_framework import status
+from rest_framework import status, permissions
 
 class ProjectList(APIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
     def get(self, request): 
         projects = Project.objects.all()
         serializer = ProjectSerializer(projects, many=True)
@@ -40,7 +42,8 @@ class ProjectDetail(APIView):
         return Response(serializer.data)
 
 class PledgeList(APIView):
-
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    
     def get(self, request):
         pledges = Pledge.objects.all()
         serializer = PledgeSerializer(pledges, many=True)
