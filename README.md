@@ -18,7 +18,7 @@ edit project
 delete project
 make pledge
 edit pledge 
-delete pledge
+delete pledge - not yet done
 * [] group permissions - projects are private except in group
 
 Pages/ features:
@@ -106,6 +106,11 @@ admin.site.register(CustomUser)
 
 However the user I created was saved successfully but I was unable to log in with this user. I discovered the issue was that because I hadn't also imported UserAdmin, the password was not being hashed properly and so the password did not match. I added UserAdmin and I was now able to log in with other users I created.
 admin.site.register(CustomUser, UserAdmin)
+
+### Self referencing foreign key
+V hard to figure out, but in the end found solution in Django Cookbook : 'self'
+https://books.agiliq.com/projects/django-orm-cookbook/en/latest/self_fk.html#
+
 
 #### Questions
 

@@ -15,7 +15,6 @@ class Project(models.Model):
         related_name='owned_projects')
 
 class Condition(models.Model):
-    # pledge = models.OneToOneField(Pledge,on_delete=models.CASCADE,primary_key=True,)
     description = models.CharField(max_length=200)
     conditionmet = models.BooleanField()
 

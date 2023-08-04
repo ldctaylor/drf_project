@@ -9,11 +9,13 @@ class ConditionSerializer(serializers.ModelSerializer):
 
 class PledgeSerializer(serializers.ModelSerializer):
     supporter = serializers.ReadOnlyField(source='supporter.id')
+    conditions = ConditionSerializer(read_only=True)
     class Meta:
         model = Pledge
         fields = '__all__'
 
 class PledgeDetailSerializer(PledgeSerializer):
+    conditions = ConditionSerializer(read_only=True)
     # How do I bring in the relevant project's detail, here????????????????
 
     def update(self, instance, validated_data):
