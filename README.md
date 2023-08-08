@@ -19,6 +19,8 @@ delete project
 make pledge
 edit pledge 
 delete pledge - not yet done
+permissions
+token authentication
 * [] group permissions - projects are private except in group
 
 Pages/ features:
