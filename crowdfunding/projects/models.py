@@ -14,10 +14,6 @@ class Project(models.Model):
         on_delete=models.CASCADE,
         related_name='owned_projects')
 
-class Condition(models.Model):
-    description = models.CharField(max_length=200)
-    conditionmet = models.BooleanField()
-
 class Pledge(models.Model):
     amount = models.IntegerField()
     comment = models.CharField(max_length=200)
@@ -26,6 +22,10 @@ class Pledge(models.Model):
     supporter = models.ForeignKey(
         get_user_model(), on_delete=models.CASCADE,related_name='pledges'
     )
-    condition = models.OneToOneField(Condition, on_delete=models.CASCADE,null=True,related_name='conditions')
+
+class Condition(models.Model):
+    description = models.CharField(max_length=200)
+    conditionmet = models.BooleanField()
+    pledge = models.OneToOneField(Pledge, on_delete=models.CASCADE,null=True,related_name='condition')
 
 
