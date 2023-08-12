@@ -19,6 +19,8 @@ delete project
 make pledge
 edit pledge 
 delete pledge - not yet done
+permissions
+token authentication
 * [] group permissions - projects are private except in group
 
 Pages/ features:
@@ -116,3 +118,5 @@ https://books.agiliq.com/projects/django-orm-cookbook/en/latest/self_fk.html#
 
 ### Combining permissions
 I feel like the IsOwner and IsSupporter permissions could be combined into one as there is code being reused and the only diff is checking if it is the owner or the supporter? 
+
+SELECT_RELATED!!!!!!!!!!!!!!!! Brings a join on the tables. uses related_name in the select_related.
