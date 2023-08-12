@@ -7,6 +7,15 @@ class ConditionSerializer(serializers.ModelSerializer):
         model = Condition
         fields = '__all__'
 
+class ConditionDetailSerializer(ConditionSerializer):
+
+    def update(self, instance, validated_data):
+        instance.description = validated_data.get('description',instance.description)
+        instance.conditionmet = validated_data.get('conditionmet',instance.conditionmet)
+        instance.pledge = validated_data.get('pledge',instance.pledge)
+        instance.save()
+        return instance 
+
 class PledgeSerializer(serializers.ModelSerializer):
     supporter = serializers.ReadOnlyField(source='supporter.id')
     condition = ConditionSerializer(read_only=True)
@@ -27,7 +36,6 @@ class PledgeDetailSerializer(PledgeSerializer):
         instance.condition = validated_data.get('condition',instance.condition)
         instance.save()
         return instance 
-
 
 class ProjectSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.id')
