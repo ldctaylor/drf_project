@@ -18,6 +18,7 @@ class CustomUserList(APIView):
         return Response(serializer.errors)
     
 class CustomUserDetail(APIView):
+
     def get_object(self, pk):
         try:
             return CustomUser.objects.get(pk=pk)
@@ -27,4 +28,3 @@ class CustomUserDetail(APIView):
         user = self.get_object(pk)
         serializer = CustomUserSerializer(user)
         return Response(serializer.data)
-

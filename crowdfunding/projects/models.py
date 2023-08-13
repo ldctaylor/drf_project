@@ -26,6 +26,6 @@ class Pledge(models.Model):
 class Condition(models.Model):
     description = models.TextField()
     conditionmet = models.BooleanField()
-    pledge = models.OneToOneField(Pledge, on_delete=models.CASCADE,null=True,related_name='condition')
+    pledge = models.OneToOneField(Pledge, on_delete=models.CASCADE,null=True,blank=True,related_name='condition')
 
 
