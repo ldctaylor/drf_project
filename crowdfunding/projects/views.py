@@ -65,7 +65,7 @@ class ProjectDetail(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
-
+    
 class PledgeList(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -100,14 +100,6 @@ class PledgeDetail(APIView):
             return pledge
         except Pledge.DoesNotExist:
             raise Http404
-
-    def get(self, request, pk):
-        pledge = self.get_object(pk)
-        serializer = PledgeDetailSerializer(pledge)
-        # condition = Condition.objects.filter(pledge=pledge).first()
-        # if condition is not None:
-        #     serializer.condition = ConditionSerializer(Condition.objects.get(pledge=pledge))
-        return Response(serializer.data)
     
     def put(self, request, pk):
         pledge = self.get_object(pk)
@@ -126,6 +118,11 @@ class PledgeDetail(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
+    
+    def delete(self, request, pk):
+        pledge = self.get_object(pk)
+        pledge.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class ConditionList(APIView):
     permission_classes = [
@@ -151,10 +148,9 @@ class ConditionList(APIView):
         )
 
 class ConditionDetail(APIView):
-    # permission_classes = [
-    #     permissions.IsAuthenticatedOrReadOnly,
-    #     IsOwnerOrReadOnly
-    # ]
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly
+    ]
 
     def get_object(self, pk):
         try:
